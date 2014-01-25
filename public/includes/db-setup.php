@@ -6,22 +6,24 @@
  */
 class DB_Setup {
 
-global $rup_db_version;
-$rup_db_version = "1.0";
+const rup_db_version = "1.0";
 
-public function rup_install() {
+public static function rup_install() {
    global $wpdb;
    global $rup_db_version;
+
+    error_log("trying to install the db tables..");
 
    $table_name = $wpdb->prefix . "runnerpost_log";
       
    $sql = "CREATE TABLE $table_name (
-  id mediumint(9) NOT NULL AUTO_INCREMENT,
-  time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-  note tinytext NOT NULL,
-  miles float NOT NULL,
-  url VARCHAR(55) DEFAULT '' NULL,
-  UNIQUE KEY id (id)
+   id mediumint(9) NOT NULL AUTO_INCREMENT,
+   run_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+   run_note tinytext NOT NULL,
+   run_distance float NOT NULL,
+   run_unit varchar(10) DEFAULT 'miles' NOT NULL,
+   run_url VARCHAR(55) DEFAULT '' NULL,
+   UNIQUE KEY id (id)
     );";
 
    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

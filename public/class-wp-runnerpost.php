@@ -20,6 +20,10 @@
  * @package WP_RunnerPost
  * @author  Mark Davis <mark.davis2@gmail.com>
  */
+
+
+require_once( plugin_dir_path( __FILE__ ) . 'includes/db-setup.php' );
+
 class WP_RunnerPost {
 
 	/**
@@ -233,6 +237,7 @@ class WP_RunnerPost {
 	 */
 	private static function single_activate() {
 		// @TODO: Define activation functionality here
+        DB_Setup::rup_install();
 	}
 
 	/**
