@@ -18,10 +18,10 @@ public static function rup_install() {
       
    $sql = "CREATE TABLE $table_name (
    id mediumint(9) NOT NULL AUTO_INCREMENT,
+   user_id mediumint(9) NOT NULL,
    run_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
    run_note tinytext NOT NULL,
    run_distance float NOT NULL,
-   run_unit varchar(10) DEFAULT 'miles' NOT NULL,
    run_url VARCHAR(55) DEFAULT '' NULL,
    UNIQUE KEY id (id)
     );";

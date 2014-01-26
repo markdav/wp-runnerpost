@@ -74,8 +74,11 @@ class WP_RunnerPost_Admin {
 		 * Read more about actions and filters:
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
-		add_action( '@TODO', array( $this, 'action_method_name' ) );
-		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
+		// actions
+        add_action( 'wp_ajax_saveRunEntry', array( $this, 'saveRunEntry' ) );
+
+        // filters
+
 
 	}
 
@@ -132,9 +135,6 @@ class WP_RunnerPost_Admin {
 	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
-	 * @TODO:
-	 *
-	 * - Rename "Plugin_Name" to the name your plugin
 	 *
 	 * @since     1.0.0
 	 *
@@ -149,6 +149,8 @@ class WP_RunnerPost_Admin {
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), WP_RunnerPost::VERSION );
+            wp_enqueue_script( 'dateTimepicker', plugins_url( 'assets/js/jquery.ui.timepicker.js', __FILE__ ), array( 'jquery-ui-datepicker', 'jquery-ui-slider' ) );
+
 		}
 
 	}
@@ -167,12 +169,6 @@ class WP_RunnerPost_Admin {
 		 *
 		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
 		 *
-		 * @TODO:
-		 *
-		 * - Change 'Page Title' to the title of your plugin admin page
-		 * - Change 'Menu Text' to the text for menu item for the plugin settings page
-		 * - Change 'manage_options' to the capability you see fit
-		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
 			__( 'WP Runner Log Administration', $this->plugin_slug ),
@@ -209,30 +205,45 @@ class WP_RunnerPost_Admin {
 
 	}
 
-	/**
-	 * NOTE:     Actions are points in the execution of a page or process
-	 *           lifecycle that WordPress fires.
-	 *
-	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function action_method_name() {
-		// @TODO: Define your action hook callback here
-	}
+    /**
+     * Save a run log
+     */
+    public function saveRunEntry(){
 
-	/**
-	 * NOTE:     Filters are points of execution in which WordPress modifies data
-	 *           before saving it or sending it to the browser.
-	 *
-	 *           Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function filter_method_name() {
-		// @TODO: Define your filter hook callback here
-	}
+        global $wpdb;
+
+        $run_time = $_POST['run_time'];
+        $run_distance = $_POST['run_distance'];
+        $run_note = $_POST['run_note'];
+        $run_url = $_POST['run_url'];
+        $run_units = $_POST['run_unit'];
+
+        error_log("You ran:" . $run_distance);
+
+        /*
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $address = $_POST['address'];
+
+        if($wpdb->insert('customers',array(
+                'name'=>$name,
+                'email'=>$email,
+                'address'=>$address,
+                'phone'=>$phone
+            ))===FALSE){
+
+            echo "Error";
+
+        }
+        else {
+            echo "Customer '".$name. "' successfully added, row ID is ".$wpdb->insert_id;
+
+        }
+        */
+        echo "wtf";
+        die();
+    }
+
+
 
 }
