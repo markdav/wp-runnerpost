@@ -216,31 +216,28 @@ class WP_RunnerPost_Admin {
         $run_distance = $_POST['run_distance'];
         $run_note = $_POST['run_note'];
         $run_url = $_POST['run_url'];
-        $run_units = $_POST['run_unit'];
+        $run_unit = $_POST['run_unit'];
 
-        error_log("You ran:" . $run_distance);
+        $table_name = $wpdb->prefix . "runnerpost_log";
 
-        /*
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $address = $_POST['address'];
+        // TODO store the distance in km (might as well be metric about it)
 
-        if($wpdb->insert('customers',array(
-                'name'=>$name,
-                'email'=>$email,
-                'address'=>$address,
-                'phone'=>$phone
+
+        if($wpdb->insert($table_name,array(
+                'run_time'=>$run_time,
+                'run_distance'=>$run_distance,
+                'run_note'=>$run_note,
+                'run_url'=>$run_url,
+                'user_id'=> get_current_user_id()
             ))===FALSE){
 
             echo "Error";
 
         }
         else {
-            echo "Customer '".$name. "' successfully added, row ID is ".$wpdb->insert_id;
+            echo "Run successfully added, row ID is ".$wpdb->insert_id;
 
         }
-        */
-        echo "wtf";
         die();
     }
 

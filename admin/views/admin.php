@@ -15,7 +15,7 @@
 
 <script>
     jQuery(document).ready(function(){
-        jQuery( "#run_time" ).datetimepicker({dateFormat: 'yy-mm dd', hour : 12, minute: 15});
+        jQuery( "#run_time" ).datetimepicker({dateFormat: 'yy-mm-dd', hour : 12, minute: 15});
         jQuery('#addRunLog').submit(saveRunLog);
 
     });
