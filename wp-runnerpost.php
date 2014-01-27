@@ -1,28 +1,7 @@
 <?php
-/**
- * Runners post log
- *
- * My first wordpress plugin.. and bit of php work so don't laugh.. :-)
- *
- * @package   wp-runnerpost
- * @author    Mark Davis <mark.davis2@gmail.com>
- * @license   GPL-2.0+
- * @link      http://www.attheborders.com
- * @copyright 2014 Mark Davis
- *
- * @wordpress-plugin
- * Plugin Name:       WP RunnerPost
- * Plugin URI:        http://www.attheborders.com
- * Description:       Plugin to let runners mix blogging and mileage logging
- * Version:           1.0.0
- * Author:            Mark Davis
- * Author URI:        http://www.attheborders.com
- * Text Domain:       wp-runnerpost-en
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Domain Path:       /languages
- * GitHub Plugin URI: https://github.com/<owner>/<repo>
- */
+
+/**  Constants Globally useful*/
+define("KILOMETERS_IN_MILE",  1.60934);
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
