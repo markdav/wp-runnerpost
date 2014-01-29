@@ -83,7 +83,30 @@ class WP_RunnerPost {
 		add_action( '@TODO', array( $this, 'action_method_name' ) );
 		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
+        add_shortcode('rp_show_run',array( $this, 'show_run' ));
+
 	}
+
+
+    /**
+     * Shortcode to display the run details for a single run within a post
+     * */
+    public function show_run($atts){
+        $id=0;
+        extract( shortcode_atts(
+            array('id' => 0), $atts ) );
+
+        global $wpdb;
+        $table_name = $wpdb->prefix . "runnerpost_log";
+        $output = '';
+
+        $run = $wpdb->get_row("SELECT * FROM " . $table_name . " WHERE id = " . $id);
+
+         $output .= "<table><tr><td>"
+             . $run->run_time . "</td><td>"  . $run->run_distance . "</td><td>" . $run->run_note . "</td></tr></table>";
+
+        return $output;
+    }
 
 	/**
 	 * Return the plugin slug.
